@@ -9,6 +9,8 @@ public interface Line {
 	
 	void add(Station station);
 	
+	void setTermini();
+	
 	String getTermini();
 	
 	Set<Station> getAllStations();

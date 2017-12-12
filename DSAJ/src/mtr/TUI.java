@@ -3,6 +3,7 @@
  */
 package mtr;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -15,14 +16,14 @@ public class TUI {
 
 	private Controller controller;  
 	private Scanner stdIn;
-	
+
 	public TUI(Controller controller) {
-		
+
 		this.controller = controller;
-		
+
 		// Creates a Scanner object for obtaining user input
 		stdIn = new Scanner(System.in);
-		
+
 		while (true) {
 			displayMenu();
 			getAndProcessUserOption();
@@ -36,7 +37,7 @@ public class TUI {
 		display(header());
 		display(menu());
 	}
-	
+
 	/**
 	 * Obtains an user option and processes it.
 	 */
@@ -72,7 +73,7 @@ public class TUI {
 			display(unrecogniseCommandErrorMsg(command));
 		}
 	}
-	
+
 	/*
 	 * Returns a string representation of a brief title for this application as the header.
 	 * @return	a header
@@ -80,20 +81,20 @@ public class TUI {
 	private static String header() {
 		return "\nMTR Information Centre\n";
 	}
-	
+
 	/*
 	 * Returns a string representation of the user menu.
 	 * @return	the user menu
 	 */
 	private static String menu() {
 		return "Enter the number associated with your chosen menu option.\n" +
-			   "1: List all termini in the MTR network\n" +
-			   "2: List all stations in a line in the MTR network\n" +
-		       "3: List all lines that are directly connected to a line\n" +
-			   "4: Find a path between two stations\n" +
-			   "5: Exit this application\n";
+				"1: List all termini in the MTR network\n" +
+				"2: List all stations in a line in the MTR network\n" +
+				"3: List all lines that are directly connected to a line\n" +
+				"4: Find a path between two stations\n" +
+				"5: Exit this application\n";
 	}
-	
+
 	/*
 	 * Displays the specified info for the user to view.
 	 * @param info	info to be displayed on the screen
@@ -101,22 +102,29 @@ public class TUI {
 	private void display(String info) {
 		System.out.println(info);
 	}
-	
-    /*
-     * Returns an error message for an unrecognised command.
-     * 
-     * @param error the unrecognised command
-     * @return      an error message
-     */
-    private static String unrecogniseCommandErrorMsg(String error) {
-            return String.format("Cannot recognise the given command: %s.%n", error);
-    }
 
-    public static void main(String[] args)
-    {
-		System.out.println("> Setting up the program");
-		TUI tui = new TUI(new ControllerImpl());
-		tui.displayMenu();
+	/*
+	 * Returns an error message for an unrecognised command.
+	 * 
+	 * @param error the unrecognised command
+	 * @return      an error message
+	 */
+	private static String unrecogniseCommandErrorMsg(String error) {
+		return String.format("Cannot recognise the given command: %s.%n", error);
+	}
 
-    }
+	public static void main(String[] args)
+	{
+		FileReader f;
+		try {
+			f = new FileReader(args[0]);
+
+			System.out.println("> Setting up the program");
+			TUI tui = new TUI(new ControllerImpl(f));
+			tui.displayMenu();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
