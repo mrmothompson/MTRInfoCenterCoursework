@@ -28,7 +28,7 @@ public class LineImpl implements Line{
 		return lineName;
 	}
 
- @Override
+	@Override
 	public void setTermini() {
 	 Object[] temp = stations.toArray();
 		Station start=(Station)temp[0];
