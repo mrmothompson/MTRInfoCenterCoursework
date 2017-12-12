@@ -15,7 +15,7 @@ public class LineImpl implements Line{
 		this.lineName=lineName;
 		stations= new LinkedHashSet<Station>();
 		stationTermini=new Station[2];
-		
+
 	}
 
 	public void add(Station station) {
@@ -30,20 +30,19 @@ public class LineImpl implements Line{
 
 	@Override
 	public void setTermini() {
-	 Object[] temp = stations.toArray();
+		Object[] temp = stations.toArray();
 		Station start=(Station)temp[0];
 		Station end=(Station)temp[temp.length-1];
 		stationTermini[0]=start;
-		stationTermini[1]=end;
-		
-		
+		stationTermini[1]=end;	
+
 	}
-	
+
 	@Override
 	public String getTermini() {
 
 		String s ="The termini of '"+getLineName()+"' are: ";
-	
+
 		return s+ stationTermini[0]+" and "+stationTermini[1];
 	}
 
@@ -81,7 +80,9 @@ public class LineImpl implements Line{
 	public String toString() {
 		String result = "";
 		for(Station item : stations) {
-			result += item + "<-->";
+			
+				result += item + "<-->";
+		
 		}
 		return result;
 

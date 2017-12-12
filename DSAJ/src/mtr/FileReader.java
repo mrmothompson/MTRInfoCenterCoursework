@@ -67,10 +67,10 @@ public class FileReader {
 	public static void main(String[] args) throws IOException{
 		FileReader f = new FileReader(args[0]);
 		System.out.println("this service has " + f.stationsCount +" stations and " + f.linesCount + " lines" );
-		for(Line l: f.lines)
-		{
-			System.out.println(l.getTermini());
-		}
+//		for(Line l: f.lines)
+//		{
+//			System.out.println(l.getTermini());
+//		}
 //
 //		String q="Airport Express";
 //		String a=null;

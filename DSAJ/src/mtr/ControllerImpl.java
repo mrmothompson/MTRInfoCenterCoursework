@@ -24,8 +24,22 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public String listStationsInLine(String line) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		String a=null;
+		for(Line l : f.lines) {		
+			if(l.getLineName().equals(line)) {
+				a= l.getLineName()+ ":"+l.toString();
+			}
+		}
+		if(a!=null)
+		{
+			return a;
+		}
+		else{
+			return "Line '"+line+"' does not exist on our system";
+		}
+		
+	
 	}
 
 	@Override
