@@ -71,51 +71,51 @@ public class FileReader {
 		{
 			System.out.println(l.getTermini());
 		}
-
-		String q="Airport Express";
-		String a=null;
-		for(Line l : f.lines) {		
-			if(l.getLineName().equals(q)) {
-				a= l.getLineName()+ ":"+l.toString();
-			}
-		}
-		if(a!=null)
-		{
-			System.out.println(a);
-		}
-		else{
-			System.out.println("Line '"+q+"' does not exist on our system");
-		}
-
-		Set<Line>connected = new HashSet<>(f.linesCount);
-		Line il = null;
-		Line swl = null;
-		String s="Island Line";
-		String s2="Walkable";
-		for(Line l : f.lines) {		
-			if(l.getLineName().equals(s)) {
-				il=l;
-			}
-			if(l.getLineName().equals(s2)) {
-				swl=l;
-			}
-		}
-		if(il!=null && swl!=null)
-		{
-		
-			for (Line line : f.lines) {
-				Set<String> r = line.getIntercection(il);
-				if(!r.isEmpty()&&!line.getLineName().equals(il.getLineName())&&!line.getLineName().equals("Walkable"))
-				{
-					connected.add(line);
-				}
-			}
-			String conSta="'"+il.getLineName()+"' Is directly connected to:\n";
-			for (Line conn : connected) {
-				conSta+=conn.getLineName()+"\n";
-			}
-			System.out.println(conSta);
-		}
+//
+//		String q="Airport Express";
+//		String a=null;
+//		for(Line l : f.lines) {		
+//			if(l.getLineName().equals(q)) {
+//				a= l.getLineName()+ ":"+l.toString();
+//			}
+//		}
+//		if(a!=null)
+//		{
+//			System.out.println(a);
+//		}
+//		else{
+//			System.out.println("Line '"+q+"' does not exist on our system");
+//		}
+//
+//		Set<Line>connected = new HashSet<>(f.linesCount);
+//		Line il = null;
+//		Line swl = null;
+//		String s="Island Line";
+//		String s2="Walkable";
+//		for(Line l : f.lines) {		
+//			if(l.getLineName().equals(s)) {
+//				il=l;
+//			}
+//			if(l.getLineName().equals(s2)) {
+//				swl=l;
+//			}
+//		}
+//		if(il!=null && swl!=null)
+//		{
+//		
+//			for (Line line : f.lines) {
+//				Set<String> r = line.getIntercection(il);
+//				if(!r.isEmpty()&&!line.getLineName().equals(il.getLineName())&&!line.getLineName().equals("Walkable"))
+//				{
+//					connected.add(line);
+//				}
+//			}
+//			String conSta="'"+il.getLineName()+"' Is directly connected to:\n";
+//			for (Line conn : connected) {
+//				conSta+=conn.getLineName()+"\n";
+//			}
+//			System.out.println(conSta);
+//		}
 
 
 	}
