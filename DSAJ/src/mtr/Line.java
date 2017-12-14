@@ -5,6 +5,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 
+/**
+ * A Interface representing a Train Line
+ */
 public interface Line {
 
 	/** Accessor/Getter for Train Line

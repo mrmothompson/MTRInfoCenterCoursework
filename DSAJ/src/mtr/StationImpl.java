@@ -1,7 +1,6 @@
 package mtr;
 
 import java.util.ArrayList;
-
 public class StationImpl implements Station {
 	private String name;
 	private Station next;
