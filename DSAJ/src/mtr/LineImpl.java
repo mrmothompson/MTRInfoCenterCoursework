@@ -42,7 +42,7 @@ public class LineImpl implements Line{
 		Station start=(Station)temp[0];
 		Station end=(Station)temp[temp.length-1];
 		stationTermini[0]=start;
-		stationTermini[1]=end;
+		stationTermini[1]=end;	
 	}
 
 	@Override
@@ -91,32 +91,32 @@ public class LineImpl implements Line{
 		return tsCopyStations;
 	}
 	
-				break;
-	{
 	public Queue<String> getLineFromTwoStations(Station a, Station b)
-			if(s.equals(a.getStationName())) {
-		for(String s : llCopyStations) {		
-		
-		Queue<String> strings = new LinkedList<>();
-		int j=0;
+	{
 		int i=0;
+		int j=0;
+		Queue<String> strings = new LinkedList<>();
+		
+		for(String s : llCopyStations) {		
+			if(s.equals(a.getStationName())) {
+				break;
 			}
 			i++;
-		for(String s : llCopyStations) {		
 		}
 		
-				break;
+		for(String s : llCopyStations) {		
 			if(s.equals(b.getStationName())) {
+				break;
 			}
 			j++;
 		}
-		if(i<j)
 		
+		if(i<j)
 		{
 			for (int k=i; k<=j;k++)
 			{
-			}
 				strings.add(getLinkedListStations().get(k));
+			}
 		}
 		else
 		{
@@ -128,6 +128,6 @@ public class LineImpl implements Line{
 		
 			return strings;
 	}
-
+	
 }
 
