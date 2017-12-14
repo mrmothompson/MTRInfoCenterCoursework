@@ -88,10 +88,11 @@ public class LineImpl implements Line{
 
 	/**  */
 	public String toString() {
-		String result = "";
+		String result = lineName+" [";
 		for(Station item : stations) {
 				result += item + "<-->";
 		}
+		result+="]";
 		return result;
 	}
 
@@ -112,7 +113,7 @@ public class LineImpl implements Line{
 		Queue<String> strings = new LinkedList<>();
 		
 		for(String s : llCopyStations) {		
-			if(s.equals(a.getStationName())) {
+			if(!s.equals(a.getStationName())) {
 				break;
 			}
 			i++;

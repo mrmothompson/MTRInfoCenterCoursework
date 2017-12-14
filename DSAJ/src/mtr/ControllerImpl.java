@@ -71,34 +71,33 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public String showPathBetween(String stationA, String stationB) {
-		Station A = null;
-		Station B = null;
-		A=stationSearch(stationA);
-		B=stationSearch(stationB);
-
-		if(!(A==null) && !(B==null))
-		{	
-			if(A.equals(B))
-				return "You have entered the same station for both entries the path is: "+A.getStationName();
-			else{
-				ArrayList<Line> aLines = A.getLines();
-				ArrayList<Line> bLines = B.getLines();
-				ArrayList<Line> connected = new ArrayList<>();
-
-				if(aLines.get(0).toString().equals(bLines.get(0).toString())) {
-					Queue<String> route = aLines.get(0).getLineFromTwoStations(A, B);
-					String s="";
-					while(route.size()>0) {
-						s+=route.remove();
-						if(route.size()!=0)
-							s+="->";
+		Station A = stationSearch(stationA);
+		Station B = stationSearch(stationB);
+		Queue<String> stationQueue = null;
+		
+		if((A==null) || (B==null))
+			return null;
+		else if(A.equals(B))
+			return "You have entered the same station for both entries the path is: "+A.getStationName();
+		else{
+			ArrayList<Line> aLines = A.getLines();
+			ArrayList<Line> bLines = B.getLines();
+			ArrayList<Line> connected = new ArrayList<>();
+			Line line = null;
+			if(aLines.contains(bLines)){
+				for (Line b: bLines)
+					if(bLines.contains(aLines)){
+						line = b;
+						break;
 					}
-					return s;
-				}
+			
+			if (line!=null)
+				stationQueue = line.getLineFromTwoStations(A, B);
+			}else{
+				//TODO:
 			}
-
 		}
-		return null;
+		return stationQueue.toString();
 	}
 
 	/** Searches for if a stated Train Line exists
