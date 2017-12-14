@@ -72,8 +72,8 @@ public class ControllerImpl implements Controller {
 		return null;
 	}
 
-	/** Searches for if a stated station Line exists
-	 * @param line: String - name of station's Line you're searching for
+	/** Searches for if a stated Train Line exists
+	 * @param line: String - name of a Train Line you're searching for
 	 */
 	public Line lineSearch(String line) {
 		for(Line l : f.lines)
