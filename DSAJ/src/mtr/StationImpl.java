@@ -1,12 +1,22 @@
 package mtr;
 
 import java.util.ArrayList;
+
+/**
+ *
+ */
 public class StationImpl implements Station {
 	private String name;
 	private Station next;
 	private Station previous;
 	private ArrayList<Line> lines;
-	
+
+	/**
+	 *
+	 * @param name
+	 * @param nextStation
+	 * @param previousStation
+	 */
 	public StationImpl(String name, Station nextStation,Station previousStation ) {
 		this.name = name;
 		this.next = nextStation;

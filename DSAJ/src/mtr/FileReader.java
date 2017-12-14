@@ -10,16 +10,25 @@ import java.util.Queue;
 import java.util.Scanner;
 import java.util.Set;
 
+/**  */
 public class FileReader {
 
+	/**  */
 	public String file;
+
+	/**  */
 	public int stationsCount;
+
+	/**  */
 	public int linesCount;
+
+	/**  */
 	public HashSet<Line> lines;
+
+	/**  */
 	public ArrayList<Station>stations;
 
-
-
+	/**  */
 	private void Counter(String file) throws FileNotFoundException
 	{
 		Scanner in = new Scanner(new File(file));
@@ -39,6 +48,7 @@ public class FileReader {
 		stationsCount+=1;
 	}
 
+	/**  */
 	public FileReader(String file) throws IOException {
 		// read seminar records from data file
 		Scanner in = new Scanner(new File(file));
@@ -75,7 +85,7 @@ public class FileReader {
 		
 	}
 
-
+	/**  */
 	public ArrayList<Station> getAllStations() {
 		return stations;
 	}

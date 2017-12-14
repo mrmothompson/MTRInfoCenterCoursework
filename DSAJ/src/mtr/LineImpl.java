@@ -12,12 +12,22 @@ import java.util.TreeSet;
 
 public class LineImpl implements Line{
 
+	/**  */
 	private String lineName;
+
+	/**  */
 	private Station[] stationTermini;
+
+	/**  */
 	private Set<Station> stations;
+
+	/**  */
 	private LinkedList<String>llCopyStations;
+
+	/**  */
 	private Set<String>tsCopyStations;
 
+	/**  */
 	public LineImpl(String lineName) {
 		this.lineName=lineName;
 		stations= new LinkedHashSet<Station>();
@@ -61,6 +71,7 @@ public class LineImpl implements Line{
 		return null;
 	}
 
+	/**  */
 	public LinkedList<String> getIntercection(Line line){
 		LinkedList<String>intersection= new LinkedList<>() ;
 		Set<String>set= new TreeSet<>();
@@ -75,6 +86,7 @@ public class LineImpl implements Line{
 		return intersection;
 	}
 
+	/**  */
 	public String toString() {
 		String result = "";
 		for(Station item : stations) {
@@ -83,16 +95,18 @@ public class LineImpl implements Line{
 		return result;
 	}
 
+	/**  */
 	public LinkedList<String> getLinkedListStations() {
 		return llCopyStations;
 	}
 
+	/**  */
 	public Set<String> getTreeSetStations() {
 		return tsCopyStations;
 	}
-	
-	public Queue<String> getLineFromTwoStations(Station a, Station b)
-	{
+
+	/**  */
+	public Queue<String> getLineFromTwoStations(Station a, Station b) {
 		int i=0;
 		int j=0;
 		Queue<String> strings = new LinkedList<>();
@@ -104,29 +118,19 @@ public class LineImpl implements Line{
 			i++;
 		}
 		
-		for(String s : llCopyStations) {		
-			if(s.equals(b.getStationName())) {
+		for(String s : llCopyStations)
+			if(s.equals(b.getStationName()))
 				break;
-			}
 			j++;
-		}
-		
+
 		if(i<j)
-		{
 			for (int k=i; k<=j;k++)
-			{
 				strings.add(getLinkedListStations().get(k));
-			}
-		}
 		else
-		{
 			for (int k=i; k>=j;k--)
-			{
 				strings.add(getLinkedListStations().get(k));
-			}
-		}
-		
-			return strings;
+
+		return strings;
 	}
 	
 }
