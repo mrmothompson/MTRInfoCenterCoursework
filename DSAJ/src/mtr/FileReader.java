@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -50,11 +51,16 @@ public class FileReader {
 			{
 				//System.out.println("adding "+ station[i]+" to "+line.getLineName());
 				Station s = new StationImpl(station[i], null, null);
-				line.add(s);						
+				line.add(s);			
+				line.getLinkedListStations().add(s.toString());
+				line.getTreeSetStations().add(s.toString());
 			} 
+			
 			lines.add(line);
 		}						
 		this.file = file;
+		
+		
 	}
 
 
@@ -87,35 +93,35 @@ public class FileReader {
 //			System.out.println("Line '"+q+"' does not exist on our system");
 //		}
 //
-//		Set<Line>connected = new HashSet<>(f.linesCount);
-//		Line il = null;
-//		Line swl = null;
-//		String s="Island Line";
-//		String s2="Walkable";
-//		for(Line l : f.lines) {		
-//			if(l.getLineName().equals(s)) {
-//				il=l;
-//			}
-//			if(l.getLineName().equals(s2)) {
-//				swl=l;
-//			}
-//		}
-//		if(il!=null && swl!=null)
-//		{
-//		
-//			for (Line line : f.lines) {
-//				Set<String> r = line.getIntercection(il);
-//				if(!r.isEmpty()&&!line.getLineName().equals(il.getLineName())&&!line.getLineName().equals("Walkable"))
-//				{
-//					connected.add(line);
-//				}
-//			}
-//			String conSta="'"+il.getLineName()+"' Is directly connected to:\n";
-//			for (Line conn : connected) {
-//				conSta+=conn.getLineName()+"\n";
-//			}
-//			System.out.println(conSta);
-//		}
+		Set<Line>connected = new HashSet<>(f.linesCount);
+		Line il = null;
+		Line swl = null;
+		String s="Island Line";
+		String s2="Walkable";
+		for(Line l : f.lines) {		
+			if(l.getLineName().equals(s)) {
+				il=l;
+			}
+			if(l.getLineName().equals(s2)) {
+				swl=l;
+			}
+		}
+		if(il!=null && swl!=null)
+		{
+		
+			for (Line line : f.lines) {
+				LinkedList<String> intersection = line.getIntercection(il);
+				if(!intersection.isEmpty()&&!line.getLineName().equals(il.getLineName())&&!line.getLineName().equals("Walkable"))
+				{
+					connected.add(line);
+				}
+			}
+			String conSta="'"+il.getLineName()+"' Is directly connected to:\n";
+			for (Line conn : connected) {
+				conSta+=conn.getLineName()+"\n";
+			}
+			System.out.println(conSta);
+		}
 
 
 	}

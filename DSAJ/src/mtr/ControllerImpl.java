@@ -1,6 +1,9 @@
 package mtr;
 
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Set;
 
 public class ControllerImpl implements Controller {
 
@@ -18,13 +21,13 @@ public class ControllerImpl implements Controller {
 		{
 			s+=l.getTermini()+"\n";
 		}
-		
+
 		return s;
 	}
 
 	@Override
 	public String listStationsInLine(String line) {
-	
+
 		String a=null;
 		for(Line l : f.lines) {		
 			if(l.getLineName().equals(line)) {
@@ -38,14 +41,35 @@ public class ControllerImpl implements Controller {
 		else{
 			return "Line '"+line+"' does not exist on our system";
 		}
-		
-	
+
+
 	}
 
 	@Override
 	public String listAllDirectlyConnectedLines(String line) {
-		// TODO Auto-generated method stub
-		return null;
+		Set<Line>connected = new HashSet<>(f.linesCount*2);
+		Line query = lineSearch(line);
+		int count=0;
+		String conSta="";
+
+
+		if(query!=null)
+		{
+			for (Line l : f.lines) {
+				LinkedList<String> intersection = l.getIntercection(query);
+				if(!intersection.isEmpty()&&!l.getLineName().equals(query.getLineName())&&!l.getLineName().equals("Walkable"))
+				{
+					connected.add(l);
+					conSta+=l.getLineName()+"\n";
+					count++;
+				}
+			}
+			return "'"+query.getLineName()+"' Is directly connected to "+count+" line(s):\n"+conSta;
+		}
+		else
+		{
+			return "Line '"+line+"' does not exist on our system";
+		}
 	}
 
 	@Override
@@ -54,4 +78,13 @@ public class ControllerImpl implements Controller {
 		return null;
 	}
 
+	public Line lineSearch(String line)
+	{
+		for(Line l : f.lines) {		
+			if(l.getLineName().equals(line)) {
+				return l;
+			}
+		}
+		return null;
+	}
 }

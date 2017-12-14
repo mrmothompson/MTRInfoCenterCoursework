@@ -1,21 +1,27 @@
 package mtr;
 
+import java.awt.List;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class LineImpl implements Line{
 
 	private String lineName;
 	private Station[] stationTermini;
 	private Set<Station> stations;
+	private LinkedList<String>llCopyStations;
+	private Set<String>tsCopyStations;
 
 	public LineImpl(String lineName) {
 		this.lineName=lineName;
 		stations= new LinkedHashSet<Station>();
 		stationTermini=new Station[2];
-
+		llCopyStations=new LinkedList<>();
+		tsCopyStations= new TreeSet<>();
 	}
 
 	public void add(Station station) {
@@ -59,20 +65,17 @@ public class LineImpl implements Line{
 	}
 
 
-	public Set<String> getIntercection(Line line){
-		Set<String>intersection=new HashSet<>();
-		Set<String>set= new HashSet<>();
+	public LinkedList<String> getIntercection(Line line){
 
-		for (Station s:line.getAllStations())
-		{
+		LinkedList<String>intersection= new LinkedList<>() ;
+		Set<String>set= new TreeSet<>();
+	
+		for(Station s: line.getAllStations()){
 			intersection.add(s.toString());
 		}
-
-		for (Station s:this.getAllStations())
-		{
+		for(Station s: this.getAllStations()){
 			set.add(s.toString());
 		}
-
 		intersection.retainAll(set);
 		return intersection;
 	}
@@ -87,6 +90,16 @@ public class LineImpl implements Line{
 		return result;
 
 	}
+
+	public LinkedList<String> getLinkedListStations() {
+		return llCopyStations;
+	}
+
+	public Set<String> getTreeSetStations() {
+		return tsCopyStations;
+	}
+	
+	
 
 
 }

@@ -1,6 +1,7 @@
 package mtr;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Set;
 
 public interface Line {
@@ -17,9 +18,13 @@ public interface Line {
 	
 	Set<Line> getConnectedLines(Collection<Line> Lines );
 	
-	Set<String> getIntercection(Line line);
+	LinkedList<String> getIntercection(Line line);
 	
 	String toString();
+	
+	LinkedList<String> getLinkedListStations();
+	
+	Set<String> getTreeSetStations();
 
 
 }

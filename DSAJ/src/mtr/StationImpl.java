@@ -17,8 +17,18 @@ public class StationImpl implements Station {
 	}
 
 	@Override
+	public void setNextStation(Station station) {
+		this.next = station;
+	}
+
+	@Override
 	public Station nextStation() {
 		return next;
+	}
+
+	@Override
+	public void setPreviousStation(Station station) {
+		this.previous = station;
 	}
 
 	@Override

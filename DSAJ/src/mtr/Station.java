@@ -5,7 +5,11 @@ public interface Station {
 
 	String getStationName();
 	
+	void setNextStation(Station station);
+	
 	Station nextStation();
+	
+	void setPreviousStation(Station station);
 	
 	Station previousStation();
 	
