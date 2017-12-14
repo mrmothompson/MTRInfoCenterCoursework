@@ -8,7 +8,8 @@ import java.util.Scanner;
 import java.util.Set;
 
 /** + ControllerImpl -implements-> Controller
- *
+ *@author Milton Ramalho, Adnaan Hussain, Mosopefoluwa Thompson
+
  */
 public class ControllerImpl implements Controller {
 
@@ -111,7 +112,9 @@ public class ControllerImpl implements Controller {
 		return null;
 	}
 
-	/**  */
+	/**Searches for if a stated Station exists
+	 * @param line: String - name of a Station you're searching for
+	 */
 	public Station stationSearch(String station)
 	{
 		for(Station s : f.stations)	

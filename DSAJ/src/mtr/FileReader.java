@@ -28,7 +28,12 @@ public class FileReader {
 	/**  */
 	public ArrayList<Station>stations;
 
-	/**  */
+
+	/**
+	 * Used to count the stations and line sizes in order to initialise Hash data structures
+	 * @param file - the file to read
+	 * @throws FileNotFoundException
+	 */
 	private void Counter(String file) throws FileNotFoundException
 	{
 		Scanner in = new Scanner(new File(file));
@@ -48,7 +53,11 @@ public class FileReader {
 		stationsCount+=1;
 	}
 
-	/**  */
+	/**
+	 * Reads a File and sets up the datastructures for the lines and stations
+	 * @param file
+	 * @throws IOException
+	 */
 	public FileReader(String file) throws IOException {
 		// read seminar records from data file
 		Scanner in = new Scanner(new File(file));
@@ -98,64 +107,6 @@ public class FileReader {
 	public static void main(String[] args) throws IOException{
 		FileReader f = new FileReader(args[0]);
 		System.out.println("this service has " + f.stationsCount +" stations and " + f.linesCount + " lines" );
-//		for(Line l: f.lines)
-//		{
-//			System.out.println(l.getTermini());
-//		}
-//
-//		String q="Airport Express";
-//		String a=null;
-//		for(Line l : f.lines) {		
-//			if(l.getLineName().equals(q)) {
-//				a= l.getLineName()+ ":"+l.toString();
-//			}
-//		}
-//		if(a!=null)
-//		{
-//			System.out.println(a);
-//		}
-//		else{
-//			System.out.println("Line '"+q+"' does not exist on our system");
-//		}
-//
-		Set<Line>connected = new HashSet<>(f.linesCount);
-		Line il = null;
-		Line swl = null;
-		String s="Airport Express";
-		String s2="Walkable";
-		for(Line l : f.lines) {		
-			if(l.getLineName().equals(s)) {
-				il=l;
-			}
-			if(l.getLineName().equals(s2)) {
-				swl=l;
-			}
-		}
-		if(il!=null && swl!=null)
-		{
-			StationImpl ap = new StationImpl("Airport", null, null);
-			StationImpl hk = new StationImpl("Hong Kong", null, null);
-
-			Queue<String> string =il.getLineFromTwoStations(hk, ap);
-			
-			System.out.println(string);
-			
-			
-//			for (Line line : f.lines) {
-//				LinkedList<String> intersection = line.getIntercection(il);
-//				if(!intersection.isEmpty()&&!line.getLineName().equals(il.getLineName())&&!line.getLineName().equals("Walkable"))
-//				{
-//					connected.add(line);
-//				}
-//			}
-//			String conSta="'"+il.getLineName()+"' Is directly connected to:\n";
-//			for (Line conn : connected) {
-//				conSta+=conn.getLineName()+"\n";
-//			}
-//			System.out.println(conSta);
-		}
-
-
 	}
 }
 

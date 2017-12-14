@@ -12,10 +12,10 @@ public class StationImpl implements Station {
 	private ArrayList<Line> lines;
 
 	/**
-	 *
-	 * @param name
-	 * @param nextStation
-	 * @param previousStation
+	 *	Constructor for the Station
+	 * @param name - the name of the station
+	 * @param nextStation - the name of the next station
+	 * @param previousStation - the name of the previous station
 	 */
 	public StationImpl(String name, Station nextStation,Station previousStation ) {
 		this.name = name;
