@@ -1,5 +1,6 @@
 package mtr;
 
+import java.util.ArrayList;
 
 public interface Station {
 
@@ -16,5 +17,9 @@ public interface Station {
 	String toString();
 
 	boolean equals(Station station);
+	
+	ArrayList<Line> getLines();
+	
+	void addLines(Line line);
 	
 }

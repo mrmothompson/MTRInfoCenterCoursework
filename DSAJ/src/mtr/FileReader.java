@@ -3,8 +3,10 @@ package mtr;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -14,6 +16,7 @@ public class FileReader {
 	public int stationsCount;
 	public int linesCount;
 	public HashSet<Line> lines;
+	public ArrayList<Station>stations;
 
 
 
@@ -41,6 +44,7 @@ public class FileReader {
 		Scanner in = new Scanner(new File(file));
 		Counter(file);
 		lines = new HashSet<>(linesCount * 2);
+		stations = new ArrayList<>(stationsCount*2);
 		// read records one by one
 		while(in.hasNextLine()){
 			String record = in.nextLine();
@@ -51,9 +55,17 @@ public class FileReader {
 			{
 				//System.out.println("adding "+ station[i]+" to "+line.getLineName());
 				Station s = new StationImpl(station[i], null, null);
-				line.add(s);			
+				line.add(s);
+				stations.add(s);
 				line.getLinkedListStations().add(s.toString());
 				line.getTreeSetStations().add(s.toString());
+				for(Station st:stations)
+				{
+					if(st.equals(s))
+					{
+						st.addLines(line);
+					}
+				}
 			} 
 			
 			lines.add(line);
@@ -64,6 +76,9 @@ public class FileReader {
 	}
 
 
+	public ArrayList<Station> getAllStations() {
+		return stations;
+	}
 
 	/**
 	 * The Main -- for a quick unit testing
@@ -96,7 +111,7 @@ public class FileReader {
 		Set<Line>connected = new HashSet<>(f.linesCount);
 		Line il = null;
 		Line swl = null;
-		String s="Island Line";
+		String s="Airport Express";
 		String s2="Walkable";
 		for(Line l : f.lines) {		
 			if(l.getLineName().equals(s)) {
@@ -108,19 +123,26 @@ public class FileReader {
 		}
 		if(il!=null && swl!=null)
 		{
-		
-			for (Line line : f.lines) {
-				LinkedList<String> intersection = line.getIntercection(il);
-				if(!intersection.isEmpty()&&!line.getLineName().equals(il.getLineName())&&!line.getLineName().equals("Walkable"))
-				{
-					connected.add(line);
-				}
-			}
-			String conSta="'"+il.getLineName()+"' Is directly connected to:\n";
-			for (Line conn : connected) {
-				conSta+=conn.getLineName()+"\n";
-			}
-			System.out.println(conSta);
+			StationImpl ap = new StationImpl("Airport", null, null);
+			StationImpl hk = new StationImpl("Hong Kong", null, null);
+
+			Queue<String> string =il.getLineFromTwoStations(hk, ap);
+			
+			System.out.println(string);
+			
+			
+//			for (Line line : f.lines) {
+//				LinkedList<String> intersection = line.getIntercection(il);
+//				if(!intersection.isEmpty()&&!line.getLineName().equals(il.getLineName())&&!line.getLineName().equals("Walkable"))
+//				{
+//					connected.add(line);
+//				}
+//			}
+//			String conSta="'"+il.getLineName()+"' Is directly connected to:\n";
+//			for (Line conn : connected) {
+//				conSta+=conn.getLineName()+"\n";
+//			}
+//			System.out.println(conSta);
 		}
 
 

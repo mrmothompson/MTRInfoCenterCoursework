@@ -1,10 +1,12 @@
 package mtr;
 
 import java.awt.List;
+import java.util.AbstractQueue;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -53,7 +55,7 @@ public class LineImpl implements Line{
 	}
 
 	@Override
-	public Set<Station> getAllStations() {
+	public Set<Station> getLineStations() {
 		return stations;
 	}
 
@@ -64,16 +66,18 @@ public class LineImpl implements Line{
 		return null;
 	}
 
+	
+	
 
 	public LinkedList<String> getIntercection(Line line){
 
 		LinkedList<String>intersection= new LinkedList<>() ;
 		Set<String>set= new TreeSet<>();
 	
-		for(Station s: line.getAllStations()){
+		for(Station s: line.getLineStations()){
 			intersection.add(s.toString());
 		}
-		for(Station s: this.getAllStations()){
+		for(Station s: this.getLineStations()){
 			set.add(s.toString());
 		}
 		intersection.retainAll(set);
@@ -97,6 +101,44 @@ public class LineImpl implements Line{
 
 	public Set<String> getTreeSetStations() {
 		return tsCopyStations;
+	}
+	
+	public Queue<String> getLineFromTwoStations(Station a, Station b)
+	{
+		int i=0;
+		int j=0;
+		Queue<String> strings = new LinkedList<>();
+		
+		for(String s : llCopyStations) {		
+			if(s.equals(a.getStationName())) {
+				break;
+			}
+			i++;
+		}
+		
+		for(String s : llCopyStations) {		
+			if(s.equals(b.getStationName())) {
+				break;
+			}
+			j++;
+		}
+		
+		if(i<j)
+		{
+			for (int k=i; k<=j;k++)
+			{
+				strings.add(getLinkedListStations().get(k));
+			}
+		}
+		else
+		{
+			for (int k=i; k>=j;k--)
+			{
+				strings.add(getLinkedListStations().get(k));
+			}
+		}
+		
+			return strings;
 	}
 	
 	

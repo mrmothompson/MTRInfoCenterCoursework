@@ -1,14 +1,18 @@
 package mtr;
 
+import java.util.ArrayList;
+
 public class StationImpl implements Station {
 	private String name;
 	private Station next;
 	private Station previous;
+	private ArrayList<Line> lines;
 	
 	public StationImpl(String name, Station nextStation,Station previousStation ) {
 		this.name = name;
 		this.next = nextStation;
 		this.previous = previousStation;
+		this.lines = new ArrayList<>();
 	}
 	
 	@Override
@@ -49,6 +53,16 @@ public class StationImpl implements Station {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void addLines(Line line) {
+		lines.add(line);
+	}
+
+	@Override
+	public ArrayList<Line> getLines() {
+		return lines;
 	}
 
 }

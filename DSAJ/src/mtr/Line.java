@@ -2,6 +2,7 @@ package mtr;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Set;
 
 public interface Line {
@@ -14,7 +15,7 @@ public interface Line {
 	
 	String getTermini();
 	
-	Set<Station> getAllStations();
+	Set<Station> getLineStations();
 	
 	Set<Line> getConnectedLines(Collection<Line> Lines );
 	
@@ -26,5 +27,6 @@ public interface Line {
 	
 	Set<String> getTreeSetStations();
 
+	Queue<String> getLineFromTwoStations(Station a, Station b);
 
 }

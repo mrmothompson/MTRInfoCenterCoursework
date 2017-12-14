@@ -1,7 +1,9 @@
 package mtr;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -74,7 +76,49 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public String showPathBetween(String stationA, String stationB) {
-		// TODO Auto-generated method stub
+
+
+
+
+		Station A = null;
+		Station B = null;
+		A=stationSearch(stationA);
+		B=stationSearch(stationB);
+
+		if(!(A==null) && !(B==null))
+		{	
+			if(A.equals(B))
+			{
+				return "You have entered the same station for both entries the path is: "+A.getStationName();
+			}
+			else{
+
+				ArrayList<Line> aLines = A.getLines();
+				ArrayList<Line> bLines = B.getLines();
+				ArrayList<Line> connected = new ArrayList<>();
+
+				if(aLines.get(0).toString().equals(bLines.get(0).toString()))
+				{
+					Queue<String> route = aLines.get(0).getLineFromTwoStations(A, B);
+					String s="";
+					while(route.size()>0)
+					{
+						s+=route.remove();
+						if(route.size()!=0)
+						{
+							s+="->";
+						}
+					}
+
+					return s;
+				}
+			}
+
+		}
+
+
+
+
 		return null;
 	}
 
@@ -83,6 +127,16 @@ public class ControllerImpl implements Controller {
 		for(Line l : f.lines) {		
 			if(l.getLineName().equals(line)) {
 				return l;
+			}
+		}
+		return null;
+	}
+
+	public Station stationSearch(String station)
+	{
+		for(Station s : f.stations) {		
+			if(s.getStationName().equals(station)) {
+				return s;
 			}
 		}
 		return null;
